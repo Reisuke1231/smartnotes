@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     path('list', views.NoteListView.as_view()),
-    path('<int:note_id>', views.detail),
+    path('<int:pk>', views.NoteDetailView.as_view()),
 ]
