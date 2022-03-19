@@ -3,13 +3,14 @@ from django.http import Http404
 from django.shortcuts import render
 from django.views.generic import CreateView, DetailView, ListView
 
+from .forms import NoteForm
 from .models import Note
 
 
 class NoteCreateView(CreateView):
     model = Note
     template_name = 'note/form.html'
-    fields = ['title', 'text']
+    form_class = NoteForm
     success_url = '/note/list'
 
 
