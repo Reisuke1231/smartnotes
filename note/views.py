@@ -1,10 +1,17 @@
 from typing import List
 from django.http import Http404
 from django.shortcuts import render
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from .forms import NoteForm
 from .models import Note
+
+
+class NoteUpdateView(UpdateView):
+    model = Note
+    template_name = 'note/form.html'
+    form_class = NoteForm
+    success_url = '/note/list'
 
 
 class NoteCreateView(CreateView):
