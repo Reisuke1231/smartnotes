@@ -9,24 +9,27 @@ from .forms import NoteForm
 from .models import Note
 
 
-class NoteDeleteView(DeleteView):
+class NoteDeleteView(LoginRequiredMixin, DeleteView):
     model = Note
     template_name = 'note/delete.html'
     success_url = '/note/list'
+    login_url = '/admin'
 
 
-class NoteUpdateView(UpdateView):
+class NoteUpdateView(LoginRequiredMixin, UpdateView):
     model = Note
     template_name = 'note/form.html'
     form_class = NoteForm
     success_url = '/note/list'
+    login_url = '/admin'
 
 
-class NoteCreateView(CreateView):
+class NoteCreateView(LoginRequiredMixin, CreateView):
     model = Note
     template_name = 'note/form.html'
     form_class = NoteForm
     success_url = '/note/list'
+    login_url = '/admin'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -46,7 +49,8 @@ class NoteListView(LoginRequiredMixin, ListView):
         return self.request.user.note.all()
 
 
-class NoteDetailView(DetailView):
+class NoteDetailView(LoginRequiredMixin, DetailView):
     model = Note
     template_name = 'note/detail.html'
     context_object_name = 'note'
+    login_url = '/admin'
