@@ -1,9 +1,16 @@
 from typing import List
 from django.http import Http404
 from django.shortcuts import render
-from django.views.generic import DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView
 
 from .models import Note
+
+
+class NoteCreateView(CreateView):
+    model = Note
+    template_name = 'note/form.html'
+    fields = ['title', 'text']
+    success_url = '/note/list'
 
 
 class NoteListView(ListView):
