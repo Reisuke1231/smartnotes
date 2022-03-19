@@ -2,9 +2,16 @@ from typing import List
 from django.http import Http404
 from django.shortcuts import render
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic.edit import DeleteView
 
 from .forms import NoteForm
 from .models import Note
+
+
+class NoteDeleteView(DeleteView):
+    model = Note
+    template_name = 'note/delete.html'
+    success_url = '/note/list'
 
 
 class NoteUpdateView(UpdateView):
